@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^2.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -22,8 +23,19 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
+    "google-proto-files": "4.2.0",
+    "grpc-tools": "^1.12.4",
+    "ts-proto": "2.4.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.11.0",
     "vite": "^5.4.10"
+  },
+  "dependenciesMeta": {
+    "google-proto-files@4.2.0": {
+      "unplugged": true
+    },
+    "ts-proto@2.4.0": {
+      "unplugged": true
+    }
   }
 }

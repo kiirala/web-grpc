@@ -19,6 +19,6 @@ message PingRequest {
 }
 
 message PingResponse {
-    google.proto.Timestamp server_time = 1;
+    google.protobuf.Timestamp server_time = 1;
     int32 message_length = 2;
 }
