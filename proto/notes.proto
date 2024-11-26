@@ -1,0 +1,55 @@
+syntax = "proto3";
+package web_grpc;
+
+option csharp_namespace = "WebGrpc.Api";
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+service Notes {
+    rpc GetNote (GetNoteRequest) returns (Note) {
+        option (google.api.http) = {
+            get: "/api/v1/notes/{id}"
+        };
+    }
+
+    rpc ListNotes (ListNotesRequest) returns (NoteList) {
+        option (google.api.http) = {
+            get: "/api/v1/notes"
+        };
+    }
+
+    rpc AddNote (Note) returns (Note) {
+        option (google.api.http) = {
+            post: "/api/v1/notes"
+            body: "*"
+        };
+    }
+}
+
+enum NoteColor {
+    YELLOW = 0;
+    GREEN = 1;
+    RED = 2;
+}
+
+message Note {
+    string id = 1;
+    string text = 2;
+    string creator = 3;
+    google.protobuf.Timestamp created_at = 4;
+    NoteColor color = 5;
+}
+
+message GetNoteRequest {
+    string id = 1;
+}
+
+message ListNotesRequest {
+    repeated string id = 1;
+    google.protobuf.Timestamp created_after = 2;
+}
+
+message NoteList {
+    repeated Note notes = 1;
+}
