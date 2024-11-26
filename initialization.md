@@ -138,6 +138,45 @@ Opening that URL should show a landing page of the Vite + React + Typescript tem
 
 ![Screenshot of Vite+React app](docs/vite-react-installed.png)
 
+### Support for IDEs
+
+Yarn with PnP needs some special configuration for IDEs so that they find the dependency packages
+and can provide automatic completion etc. for them. For details, see
+[Editor SDKs](https://yarnpkg.com/getting-started/editor-sdks) page on Yarn website.
+
+I will go through the setup for VSCode. First we'll use the `@yarnpkg/sdks` tool:
+
+```
+$ cd web-client
+$ yarn dlx @yarnpkg/sdks vscode
+...
+➤ YN0000: ┌ Generating SDKs inside .yarn/sdks
+➤ YN0000: │ ✓ Eslint
+➤ YN0000: │ ✓ Typescript
+➤ YN0000: │ • 6 SDKs were skipped based on your root dependencies
+➤ YN0000: └ Completed
+➤ YN0000: ┌ Generating settings
+➤ YN0000: │ ✓ Vscode (new ✨)
+➤ YN0000: └ Completed
+```
+
+This generates a `.vscode` directory inside the `client-web` directory. We'll need to move its
+contents to a top level `.vscode` directory in the project. If this wasn't a freshly created
+project, we might need to merge the file contents with any already existing files in the top-level
+`.vscode` directory. After this move the paths inside `settings.json` will not be correct any
+longer so they need to be updated.
+
+```json
+"eslint.nodePath": "web-client/.yarn/sdks",
+"typescript.tsdk": "web-client/.yarn/sdks/typescript/lib",
+```
+
+Here, I added `web-client/` to both paths to get them pointing to existing directories.
+
+Finally, we can select in VSCode that we want to use the workspace version of Typescript. Even if
+it's the same version number as provided by VSCode itself, the workspace version contains extra
+functionality so that it can use PnP to locate any packages.
+
 ## Create the .NET server project
 
 We will use `dotnet` commands at the repository root to bring up a .NET server project. The `react`
