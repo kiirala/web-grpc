@@ -10,7 +10,7 @@ if (process.argv.length != 3) {
   exit(1);
 }
 
-var selfName = process.argv[1];
+const selfName = process.argv[1];
 console.log('Working directory:', cwd());
 console.log('Script directory:', path.dirname(process.argv[1]));
 console.log('Script name', selfName);
